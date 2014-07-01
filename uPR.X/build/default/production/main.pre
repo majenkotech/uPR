@@ -4780,7 +4780,19 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 19 "api.h"
+# 20 "api.h"
+struct ioPin {
+volatile uint8_t *tris;
+volatile uint8_t *port;
+volatile uint8_t *lat;
+uint8_t pin;
+int8_t adc;
+int8_t pullup;
+};
+
+extern const struct ioPin _pins[];
+extern const uint8_t _pins_max;
+
 extern uint32_t millis();
 extern void delay(uint32_t del);
 extern void pinMode(uint8_t pin, uint8_t mode);

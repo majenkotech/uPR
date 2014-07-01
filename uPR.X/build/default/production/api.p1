@@ -1,24 +1,4 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[s S355 `*Vuc 1 `*Vuc 1 `*Vuc 1 `uc 1 `c 1 `c 1 ]
-[n S355 ioPin tris port lat pin adc pullup ]
-"2039 /opt/microchip/xc8/v1.12/include/pic18f23k20.h
-[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
-"734
-[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
-"1554
-[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
-"1818
-[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
-"497
-[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
-"1422
-[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"2260
-[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
-"963
-[v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
-"1686
-[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 [s S311 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S311 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
 [s S312 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -31,13 +11,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S315 . . GIEL GIEH ]
 [u S310 `S311 1 `S312 1 `S313 1 `S314 1 `S315 1 ]
 [n S310 . . . . . . ]
-"6256
+"6256 /opt/microchip/xc8/v1.12/include/pic18f23k20.h
 [v _INTCONbits `VS310 ~T0 @X0 0 e@4082 ]
 "5799
 [v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
 "5793
 [v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
-"411
+"30 api.h
+[v __pins_max `Cuc ~T0 @X0 0 e ]
+[s S355 `*Vuc 1 `*Vuc 1 `*Vuc 1 `uc 1 `c 1 `c 1 ]
+[n S355 ioPin tris port lat pin adc pullup ]
+"29
+[v __pins `CS355 ~T0 @X0 -> 0 `x e ]
+"411 /opt/microchip/xc8/v1.12/include/pic18f23k20.h
 [v _ANSEL `Vuc ~T0 @X0 0 e@3966 ]
 "454
 [v _ANSELH `Vuc ~T0 @X0 0 e@3967 ]
@@ -77,10 +63,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S306 . . . . ]
 "6160
 [v _INTCON2bits `VS306 ~T0 @X0 0 e@4081 ]
+"1422
+[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
+"1554
+[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
+"1686
+[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 [p mainexit ]
-"216 api.c
+"182 api.c
 [v _setup `(v ~T0 @X0 0 ef ]
-"217
+"183
 [v _loop `(v ~T0 @X0 0 ef ]
 [; ;pic18f23k20.h: 44: extern volatile unsigned char SSPMSK @ 0xF77;
 "46 /opt/microchip/xc8/v1.12/include/pic18f23k20.h
@@ -3602,11 +3594,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;api.h: 19: extern uint32_t millis();
-[; ;api.h: 20: extern void delay(uint32_t del);
-[; ;api.h: 21: extern void pinMode(uint8_t pin, uint8_t mode);
-[; ;api.h: 22: extern void digitalWrite(uint8_t pin, uint8_t val);
-[; ;api.h: 23: extern uint8_t digitalRead(uint8_t pin);
+[; ;api.h: 20: struct ioPin {
+[; ;api.h: 21: volatile uint8_t *tris;
+[; ;api.h: 22: volatile uint8_t *port;
+[; ;api.h: 23: volatile uint8_t *lat;
+[; ;api.h: 24: uint8_t pin;
+[; ;api.h: 25: int8_t adc;
+[; ;api.h: 26: int8_t pullup;
+[; ;api.h: 27: };
+[; ;api.h: 29: extern const struct ioPin _pins[];
+[; ;api.h: 30: extern const uint8_t _pins_max;
+[; ;api.h: 32: extern uint32_t millis();
+[; ;api.h: 33: extern void delay(uint32_t del);
+[; ;api.h: 34: extern void pinMode(uint8_t pin, uint8_t mode);
+[; ;api.h: 35: extern void digitalWrite(uint8_t pin, uint8_t val);
+[; ;api.h: 36: extern uint8_t digitalRead(uint8_t pin);
 "14 api.c
 [p x FOSC=INTIO67 ]
 "15
@@ -3669,662 +3671,426 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> -> 0 `i `l `ul
 ]
 [; ;api.c: 63: static volatile uint32_t __millis = 0;
-[; ;api.c: 65: struct ioPin {
-[; ;api.c: 66: volatile uint8_t *tris;
-[; ;api.c: 67: volatile uint8_t *port;
-[; ;api.c: 68: volatile uint8_t *lat;
-[; ;api.c: 69: uint8_t pin;
-[; ;api.c: 70: int8_t adc;
-[; ;api.c: 71: int8_t pullup;
-[; ;api.c: 72: };
-"74
-[v __pins `CS355 ~T0 @X0 -> 0 `x e ]
-[i __pins
-:U ..
-:U ..
-"75
-&U _TRISB
-&U _PORTB
-&U _LATB
--> -> 7 `i `uc
--> -U -> 1 `i `c
--> -> 7 `i `c
-..
-:U ..
-"76
-&U _TRISB
-&U _PORTB
-&U _LATB
--> -> 6 `i `uc
--> -U -> 1 `i `c
--> -> 6 `i `c
-..
-:U ..
-"77
-&U _TRISB
-&U _PORTB
-&U _LATB
--> -> 0 `i `uc
--> -> 12 `i `c
--> -> 0 `i `c
-..
-:U ..
-"78
-&U _TRISB
-&U _PORTB
-&U _LATB
--> -> 1 `i `uc
--> -> 10 `i `c
--> -> 1 `i `c
-..
-:U ..
-"79
-&U _TRISA
-&U _PORTA
-&U _LATA
--> -> 0 `i `uc
--> -> 0 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"80
-&U _TRISA
-&U _PORTA
-&U _LATA
--> -> 1 `i `uc
--> -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"81
-&U _TRISC
-&U _PORTC
-&U _LATC
--> -> 7 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"82
-&U _TRISC
-&U _PORTC
-&U _LATC
--> -> 6 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"83
-&U _TRISC
-&U _PORTC
-&U _LATC
--> -> 5 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"84
-&U _TRISC
-&U _PORTC
-&U _LATC
--> -> 4 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"85
-&U _TRISC
-&U _PORTC
-&U _LATC
--> -> 3 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"86
-&U _TRISC
-&U _PORTC
-&U _LATC
--> -> 2 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"87
-&U _TRISC
-&U _PORTC
-&U _LATC
--> -> 1 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"88
-&U _TRISC
-&U _PORTC
-&U _LATC
--> -> 0 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"89
-&U _TRISA
-&U _PORTA
-&U _LATA
--> -> 5 `i `uc
--> -> 4 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"90
-&U _TRISA
-&U _PORTA
-&U _LATA
--> -> 4 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"91
-&U _TRISA
-&U _PORTA
-&U _LATA
--> -> 3 `i `uc
--> -> 3 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"92
-&U _TRISA
-&U _PORTA
-&U _LATA
--> -> 2 `i `uc
--> -> 2 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"93
-&U _TRISB
-&U _PORTB
-&U _LATB
--> -> 5 `i `uc
--> -U -> 1 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"94
-&U _TRISB
-&U _PORTB
-&U _LATB
--> -> 4 `i `uc
--> -> 11 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"95
-&U _TRISB
-&U _PORTB
-&U _LATB
--> -> 3 `i `uc
--> -> 9 `i `c
--> -U -> 1 `i `c
-..
-:U ..
-"96
-&U _TRISB
-&U _PORTB
-&U _LATB
--> -> 2 `i `uc
--> -> 8 `i `c
--> -U -> 1 `i `c
-..
-..
-]
-[; ;api.c: 74: const struct ioPin _pins[] = {
-[; ;api.c: 75: { &TRISB, &PORTB, &LATB, 7, -1, 7 },
-[; ;api.c: 76: { &TRISB, &PORTB, &LATB, 6, -1, 6 },
-[; ;api.c: 77: { &TRISB, &PORTB, &LATB, 0, 12, 0 },
-[; ;api.c: 78: { &TRISB, &PORTB, &LATB, 1, 10, 1 },
-[; ;api.c: 79: { &TRISA, &PORTA, &LATA, 0, 0, -1 },
-[; ;api.c: 80: { &TRISA, &PORTA, &LATA, 1, 1, -1 },
-[; ;api.c: 81: { &TRISC, &PORTC, &LATC, 7, -1, -1 },
-[; ;api.c: 82: { &TRISC, &PORTC, &LATC, 6, -1, -1 },
-[; ;api.c: 83: { &TRISC, &PORTC, &LATC, 5, -1, -1 },
-[; ;api.c: 84: { &TRISC, &PORTC, &LATC, 4, -1, -1 },
-[; ;api.c: 85: { &TRISC, &PORTC, &LATC, 3, -1, -1 },
-[; ;api.c: 86: { &TRISC, &PORTC, &LATC, 2, -1, -1 },
-[; ;api.c: 87: { &TRISC, &PORTC, &LATC, 1, -1, -1 },
-[; ;api.c: 88: { &TRISC, &PORTC, &LATC, 0, -1, -1 },
-[; ;api.c: 89: { &TRISA, &PORTA, &LATA, 5, 4, -1 },
-[; ;api.c: 90: { &TRISA, &PORTA, &LATA, 4, -1, -1 },
-[; ;api.c: 91: { &TRISA, &PORTA, &LATA, 3, 3, -1 },
-[; ;api.c: 92: { &TRISA, &PORTA, &LATA, 2, 2, -1 },
-[; ;api.c: 93: { &TRISB, &PORTB, &LATB, 5, -1, -1 },
-[; ;api.c: 94: { &TRISB, &PORTB, &LATB, 4, 11, -1 },
-[; ;api.c: 95: { &TRISB, &PORTB, &LATB, 3, 9, -1 },
-[; ;api.c: 96: { &TRISB, &PORTB, &LATB, 2, 8, -1 },
-[; ;api.c: 97: };
-"101
-[v F3892 `(v ~T0 @X0 1 tf ]
-[v ___isr_handler `ILF3892 ~T0 @X0 1 e ]
+"67
+[v F3893 `(v ~T0 @X0 1 tf ]
+[v ___isr_handler `ILF3893 ~T0 @X0 1 e ]
 {
-[; ;api.c: 101: void interrupt low_priority __isr_handler(void) {
+[; ;api.c: 67: void interrupt low_priority __isr_handler(void) {
 [e :U ___isr_handler ]
 [f ]
-[; ;api.c: 102: if (INTCONbits.TMR0IE && INTCONbits.T0IF) {
-"102
+[; ;api.c: 68: if (INTCONbits.TMR0IE && INTCONbits.T0IF) {
+"68
 [e $ ! && != -> . . _INTCONbits 0 5 `i -> -> -> 0 `i `Vuc `i != -> . . _INTCONbits 3 2 `i -> -> -> 0 `i `Vuc `i 357  ]
 {
-[; ;api.c: 103: INTCONbits.T0IF = 0;
-"103
+[; ;api.c: 69: INTCONbits.T0IF = 0;
+"69
 [e = . . _INTCONbits 3 2 -> -> 0 `i `uc ]
-"104
+"70
 [v _tpr `ui ~T0 @X0 1 a ]
-[; ;api.c: 104: uint16_t tpr = (64000000UL/4)/1000;
+[; ;api.c: 70: uint16_t tpr = (64000000UL/4)/1000;
 [e = _tpr -> / / -> 64000000 `ul -> -> -> 4 `i `l `ul -> -> -> 1000 `i `l `ul `ui ]
-[; ;api.c: 105: tpr = 0xFFFF - tpr;
-"105
+[; ;api.c: 71: tpr = 0xFFFF - tpr;
+"71
 [e = _tpr - -> 65535 `ui _tpr ]
-[; ;api.c: 106: TMR0H = tpr >> 8;
-"106
+[; ;api.c: 72: TMR0H = tpr >> 8;
+"72
 [e = _TMR0H -> >> _tpr -> 8 `i `uc ]
-[; ;api.c: 107: TMR0L = tpr & 0xFF;
-"107
+[; ;api.c: 73: TMR0L = tpr & 0xFF;
+"73
 [e = _TMR0L -> & _tpr -> -> 255 `i `ui `uc ]
-[; ;api.c: 108: __millis++;
-"108
+[; ;api.c: 74: __millis++;
+"74
 [e ++ ___millis -> -> -> 1 `i `l `ul ]
-"109
+"75
 }
 [e :U 357 ]
-[; ;api.c: 109: }
-[; ;api.c: 110: }
-"110
+[; ;api.c: 75: }
+[; ;api.c: 76: }
+"76
 [e :UE 356 ]
 }
-"112
+"78
 [v _millis `(ul ~T0 @X0 1 ef ]
 {
-[; ;api.c: 112: uint32_t millis() {
+[; ;api.c: 78: uint32_t millis() {
 [e :U _millis ]
 [f ]
-"113
+"79
 [v _mil `ul ~T0 @X0 1 a ]
-[; ;api.c: 113: uint32_t mil;
-[; ;api.c: 114: INTCONbits.T0IE = 0;
-"114
+[; ;api.c: 79: uint32_t mil;
+[; ;api.c: 80: INTCONbits.T0IE = 0;
+"80
 [e = . . _INTCONbits 3 5 -> -> 0 `i `uc ]
-[; ;api.c: 115: mil = __millis;
-"115
+[; ;api.c: 81: mil = __millis;
+"81
 [e = _mil ___millis ]
-[; ;api.c: 116: INTCONbits.T0IE = 1;
-"116
+[; ;api.c: 82: INTCONbits.T0IE = 1;
+"82
 [e = . . _INTCONbits 3 5 -> -> 1 `i `uc ]
-[; ;api.c: 117: return mil;
-"117
+[; ;api.c: 83: return mil;
+"83
 [e ) _mil ]
 [e $UE 358  ]
-[; ;api.c: 118: }
-"118
+[; ;api.c: 84: }
+"84
 [e :UE 358 ]
 }
-"120
+"86
 [v _delay `(v ~T0 @X0 1 ef1`ul ]
 {
-[; ;api.c: 120: void delay(uint32_t del) {
+[; ;api.c: 86: void delay(uint32_t del) {
 [e :U _delay ]
 [v _del `ul ~T0 @X0 1 r1 ]
 [f ]
-"121
+"87
 [v _start `ul ~T0 @X0 1 a ]
-[; ;api.c: 121: uint32_t start = millis();
+[; ;api.c: 87: uint32_t start = millis();
 [e = _start ( _millis ..  ]
-[; ;api.c: 122: while (millis() - start < del) {
-"122
+[; ;api.c: 88: while (millis() - start < del) {
+"88
 [e $U 360  ]
 [e :U 361 ]
 {
-[; ;api.c: 123: continue;
-"123
+[; ;api.c: 89: continue;
+"89
 [e $U 360  ]
-"124
+"90
 }
 [e :U 360 ]
-"122
+"88
 [e $ < - ( _millis ..  _start _del 361  ]
 [e :U 362 ]
-[; ;api.c: 124: }
-[; ;api.c: 125: }
-"125
+[; ;api.c: 90: }
+[; ;api.c: 91: }
+"91
 [e :UE 359 ]
 }
-"127
+"93
 [v _pinMode `(v ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;api.c: 127: void pinMode(uint8_t pin, uint8_t mode) {
+[; ;api.c: 93: void pinMode(uint8_t pin, uint8_t mode) {
 [e :U _pinMode ]
 [v _pin `uc ~T0 @X0 1 r1 ]
 [v _mode `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;api.c: 128: if (pin >= (sizeof(_pins) / sizeof (_pins[0]))) {
-"128
-[e $ ! >= -> _pin `ui / -> # __pins `ui -> # *U + &U __pins * -> -> -> 0 `i `ui `ux -> -> # *U &U __pins `ui `ux `ui 364  ]
+[; ;api.c: 94: if (pin >= _pins_max) {
+"94
+[e $ ! >= -> _pin `i -> __pins_max `i 364  ]
 {
-[; ;api.c: 129: return;
-"129
+[; ;api.c: 95: return;
+"95
 [e $UE 363  ]
-"130
+"96
 }
 [e :U 364 ]
-[; ;api.c: 130: }
-[; ;api.c: 132: switch(mode) {
-"132
+[; ;api.c: 96: }
+[; ;api.c: 98: switch(mode) {
+"98
 [e $U 366  ]
 {
-[; ;api.c: 133: case 0:
-"133
+[; ;api.c: 99: case 0:
+"99
 [e :U 367 ]
-[; ;api.c: 134: *(_pins[pin].tris) &= (1<<_pins[pin].pin);
-"134
+[; ;api.c: 100: *(_pins[pin].tris) &= (1<<_pins[pin].pin);
+"100
 [e =& *U . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 0 -> << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 3 `uc ]
-[; ;api.c: 135: break;
-"135
+[; ;api.c: 101: break;
+"101
 [e $U 365  ]
-[; ;api.c: 137: case 2:
-"137
+[; ;api.c: 103: case 2:
+"103
 [e :U 368 ]
-[; ;api.c: 138: *(_pins[pin].tris) |= (1<<_pins[pin].pin);
-"138
+[; ;api.c: 104: *(_pins[pin].tris) |= (1<<_pins[pin].pin);
+"104
 [e =| *U . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 0 -> << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 3 `uc ]
-[; ;api.c: 139: if (_pins[pin].adc >= 0) {
-"139
+[; ;api.c: 105: if (_pins[pin].adc >= 0) {
+"105
 [e $ ! >= -> . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 4 `i -> 0 `i 369  ]
 {
-[; ;api.c: 140: if (_pins[pin].adc < 8) {
-"140
+[; ;api.c: 106: if (_pins[pin].adc < 8) {
+"106
 [e $ ! < -> . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 4 `i -> 8 `i 370  ]
 {
-[; ;api.c: 141: ANSEL &= ~(1<<_pins[pin].adc);
-"141
+[; ;api.c: 107: ANSEL &= ~(1<<_pins[pin].adc);
+"107
 [e =& _ANSEL -> ~ << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 4 `uc ]
-"142
+"108
 }
-[; ;api.c: 142: } else {
+[; ;api.c: 108: } else {
 [e $U 371  ]
 [e :U 370 ]
 {
-[; ;api.c: 143: ANSELH &= ~(1<<(_pins[pin].adc-8));
-"143
+[; ;api.c: 109: ANSELH &= ~(1<<(_pins[pin].adc-8));
+"109
 [e =& _ANSELH -> ~ << -> 1 `i - -> . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 4 `i -> 8 `i `uc ]
-"144
+"110
 }
 [e :U 371 ]
-"145
+"111
 }
 [e :U 369 ]
-[; ;api.c: 144: }
-[; ;api.c: 145: }
-[; ;api.c: 146: if (_pins[pin].pullup >= 0) {
-"146
+[; ;api.c: 110: }
+[; ;api.c: 111: }
+[; ;api.c: 112: if (_pins[pin].pullup >= 0) {
+"112
 [e $ ! >= -> . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 5 `i -> 0 `i 372  ]
 {
-[; ;api.c: 147: WPUB |= (1<<_pins[pin].pullup);
-"147
+[; ;api.c: 113: WPUB |= (1<<_pins[pin].pullup);
+"113
 [e =| _WPUB -> << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 5 `uc ]
-"148
+"114
 }
 [e :U 372 ]
-[; ;api.c: 148: }
-[; ;api.c: 149: break;
-"149
+[; ;api.c: 114: }
+[; ;api.c: 115: break;
+"115
 [e $U 365  ]
-[; ;api.c: 151: case 1:
-"151
+[; ;api.c: 117: case 1:
+"117
 [e :U 373 ]
-[; ;api.c: 152: *(_pins[pin].tris) |= (1<<_pins[pin].pin);
-"152
+[; ;api.c: 118: *(_pins[pin].tris) |= (1<<_pins[pin].pin);
+"118
 [e =| *U . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 0 -> << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 3 `uc ]
-[; ;api.c: 153: if (_pins[pin].adc >= 0) {
-"153
+[; ;api.c: 119: if (_pins[pin].adc >= 0) {
+"119
 [e $ ! >= -> . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 4 `i -> 0 `i 374  ]
 {
-[; ;api.c: 154: if (_pins[pin].adc < 8) {
-"154
+[; ;api.c: 120: if (_pins[pin].adc < 8) {
+"120
 [e $ ! < -> . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 4 `i -> 8 `i 375  ]
 {
-[; ;api.c: 155: ANSEL &= ~(1<<_pins[pin].adc);
-"155
+[; ;api.c: 121: ANSEL &= ~(1<<_pins[pin].adc);
+"121
 [e =& _ANSEL -> ~ << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 4 `uc ]
-"156
+"122
 }
-[; ;api.c: 156: } else {
+[; ;api.c: 122: } else {
 [e $U 376  ]
 [e :U 375 ]
 {
-[; ;api.c: 157: ANSELH &= ~(1<<(_pins[pin].adc-8));
-"157
+[; ;api.c: 123: ANSELH &= ~(1<<(_pins[pin].adc-8));
+"123
 [e =& _ANSELH -> ~ << -> 1 `i - -> . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 4 `i -> 8 `i `uc ]
-"158
+"124
 }
 [e :U 376 ]
-"159
+"125
 }
 [e :U 374 ]
-[; ;api.c: 158: }
-[; ;api.c: 159: }
-[; ;api.c: 160: if (_pins[pin].pullup >= 0) {
-"160
+[; ;api.c: 124: }
+[; ;api.c: 125: }
+[; ;api.c: 126: if (_pins[pin].pullup >= 0) {
+"126
 [e $ ! >= -> . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 5 `i -> 0 `i 377  ]
 {
-[; ;api.c: 161: WPUB &= ~(1<<_pins[pin].pullup);
-"161
+[; ;api.c: 127: WPUB &= ~(1<<_pins[pin].pullup);
+"127
 [e =& _WPUB -> ~ << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 5 `uc ]
-"162
+"128
 }
 [e :U 377 ]
-[; ;api.c: 162: }
-[; ;api.c: 163: break;
-"163
+[; ;api.c: 128: }
+[; ;api.c: 129: break;
+"129
 [e $U 365  ]
-"164
+"130
 }
-[; ;api.c: 164: }
+[; ;api.c: 130: }
 [e $U 365  ]
-"132
+"98
 [e :U 366 ]
 [e [\ _mode , $ -> -> 0 `i `uc 367
  , $ -> -> 2 `i `uc 368
  , $ -> -> 1 `i `uc 373
  365 ]
-"164
+"130
 [e :U 365 ]
-[; ;api.c: 165: }
-"165
+[; ;api.c: 131: }
+"131
 [e :UE 363 ]
 }
-"167
+"133
 [v _digitalWrite `(v ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;api.c: 167: void digitalWrite(uint8_t pin, uint8_t val) {
+[; ;api.c: 133: void digitalWrite(uint8_t pin, uint8_t val) {
 [e :U _digitalWrite ]
 [v _pin `uc ~T0 @X0 1 r1 ]
 [v _val `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;api.c: 168: if (pin >= (sizeof(_pins) / sizeof (_pins[0]))) {
-"168
-[e $ ! >= -> _pin `ui / -> # __pins `ui -> # *U + &U __pins * -> -> -> 0 `i `ui `ux -> -> # *U &U __pins `ui `ux `ui 379  ]
+[; ;api.c: 134: if (pin >= _pins_max) {
+"134
+[e $ ! >= -> _pin `i -> __pins_max `i 379  ]
 {
-[; ;api.c: 169: return;
-"169
+[; ;api.c: 135: return;
+"135
 [e $UE 378  ]
-"170
+"136
 }
 [e :U 379 ]
-[; ;api.c: 170: }
-[; ;api.c: 171: if (val > 0) {
-"171
+[; ;api.c: 136: }
+[; ;api.c: 137: if (val > 0) {
+"137
 [e $ ! > -> _val `i -> 0 `i 380  ]
 {
-[; ;api.c: 172: *_pins[pin].lat |= (1<<_pins[pin].pin);
-"172
+[; ;api.c: 138: *_pins[pin].lat |= (1<<_pins[pin].pin);
+"138
 [e =| *U . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 2 -> << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 3 `uc ]
-"173
+"139
 }
-[; ;api.c: 173: } else {
+[; ;api.c: 139: } else {
 [e $U 381  ]
 [e :U 380 ]
 {
-[; ;api.c: 174: *_pins[pin].lat &= ~(1<<_pins[pin].pin);
-"174
+[; ;api.c: 140: *_pins[pin].lat &= ~(1<<_pins[pin].pin);
+"140
 [e =& *U . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 2 -> ~ << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 3 `uc ]
-"175
+"141
 }
 [e :U 381 ]
-[; ;api.c: 175: }
-[; ;api.c: 176: }
-"176
+[; ;api.c: 141: }
+[; ;api.c: 142: }
+"142
 [e :UE 378 ]
 }
-"178
+"144
 [v _digitalRead `(uc ~T0 @X0 1 ef1`uc ]
 {
-[; ;api.c: 178: uint8_t digitalRead(uint8_t pin) {
+[; ;api.c: 144: uint8_t digitalRead(uint8_t pin) {
 [e :U _digitalRead ]
 [v _pin `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;api.c: 179: if (pin >= (sizeof(_pins) / sizeof (_pins[0]))) {
-"179
-[e $ ! >= -> _pin `ui / -> # __pins `ui -> # *U + &U __pins * -> -> -> 0 `i `ui `ux -> -> # *U &U __pins `ui `ux `ui 383  ]
+[; ;api.c: 145: if (pin >= _pins_max) {
+"145
+[e $ ! >= -> _pin `i -> __pins_max `i 383  ]
 {
-[; ;api.c: 180: return 0;
-"180
+[; ;api.c: 146: return 0;
+"146
 [e ) -> -> 0 `i `uc ]
 [e $UE 382  ]
-"181
+"147
 }
 [e :U 383 ]
-[; ;api.c: 181: }
-[; ;api.c: 182: return (*_pins[pin].port & (1<<_pins[pin].pin)) ? 1 : 0;
-"182
+[; ;api.c: 147: }
+[; ;api.c: 148: return (*_pins[pin].port & (1<<_pins[pin].pin)) ? 1 : 0;
+"148
 [e ) -> ? != & -> *U . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 1 `i << -> 1 `i . *U + &U __pins * -> _pin `ux -> -> # *U &U __pins `ui `ux 3 -> 0 `i : -> 1 `i -> 0 `i `uc ]
 [e $UE 382  ]
-[; ;api.c: 183: }
-"183
+[; ;api.c: 149: }
+"149
 [e :UE 382 ]
 }
-"185
+"151
 [v ___initSystem `(v ~T0 @X0 1 ef ]
 {
-[; ;api.c: 185: void __initSystem() {
+[; ;api.c: 151: void __initSystem() {
 [e :U ___initSystem ]
 [f ]
-[; ;api.c: 187: OSCCONbits.IRCF = 0b111;
-"187
+[; ;api.c: 153: OSCCONbits.IRCF = 0b111;
+"153
 [e = . . _OSCCONbits 0 3 -> -> 7 `i `uc ]
-[; ;api.c: 188: while (OSCCONbits.IOFS == 0) {
-"188
+[; ;api.c: 154: while (OSCCONbits.IOFS == 0) {
+"154
 [e $U 385  ]
 [e :U 386 ]
 {
-[; ;api.c: 189: continue;
-"189
+[; ;api.c: 155: continue;
+"155
 [e $U 385  ]
-"190
+"156
 }
 [e :U 385 ]
-"188
+"154
 [e $ == -> . . _OSCCONbits 0 1 `i -> 0 `i 386  ]
 [e :U 387 ]
-[; ;api.c: 190: }
-[; ;api.c: 191: OSCTUNEbits.PLLEN = 1;
-"191
+[; ;api.c: 156: }
+[; ;api.c: 157: OSCTUNEbits.PLLEN = 1;
+"157
 [e = . . _OSCTUNEbits 0 1 -> -> 1 `i `uc ]
-[; ;api.c: 195: T0CONbits.T08BIT = 0;
-"195
+[; ;api.c: 161: T0CONbits.T08BIT = 0;
+"161
 [e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
-[; ;api.c: 196: T0CONbits.T0CS = 0;
-"196
+[; ;api.c: 162: T0CONbits.T0CS = 0;
+"162
 [e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;api.c: 197: T0CONbits.PSA = 1;
-"197
+[; ;api.c: 163: T0CONbits.PSA = 1;
+"163
 [e = . . _T0CONbits 0 1 -> -> 1 `i `uc ]
-"198
+"164
 [v _tpr `ui ~T0 @X0 1 a ]
-[; ;api.c: 198: uint16_t tpr = (64000000UL/4)/1000;
+[; ;api.c: 164: uint16_t tpr = (64000000UL/4)/1000;
 [e = _tpr -> / / -> 64000000 `ul -> -> -> 4 `i `l `ul -> -> -> 1000 `i `l `ul `ui ]
-[; ;api.c: 199: tpr = 0xFFFF - tpr;
-"199
+[; ;api.c: 165: tpr = 0xFFFF - tpr;
+"165
 [e = _tpr - -> 65535 `ui _tpr ]
-[; ;api.c: 200: TMR0H = tpr >> 8;
-"200
+[; ;api.c: 166: TMR0H = tpr >> 8;
+"166
 [e = _TMR0H -> >> _tpr -> 8 `i `uc ]
-[; ;api.c: 201: TMR0L = tpr & 0xFF;
-"201
+[; ;api.c: 167: TMR0L = tpr & 0xFF;
+"167
 [e = _TMR0L -> & _tpr -> -> 255 `i `ui `uc ]
-[; ;api.c: 202: INTCONbits.T0IF = 0;
-"202
+[; ;api.c: 168: INTCONbits.T0IF = 0;
+"168
 [e = . . _INTCONbits 3 2 -> -> 0 `i `uc ]
-[; ;api.c: 203: INTCONbits.T0IE = 1;
-"203
+[; ;api.c: 169: INTCONbits.T0IE = 1;
+"169
 [e = . . _INTCONbits 3 5 -> -> 1 `i `uc ]
-[; ;api.c: 204: INTCONbits.PEIE = 1;
-"204
+[; ;api.c: 170: INTCONbits.PEIE = 1;
+"170
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;api.c: 205: INTCONbits.GIE = 1;
-"205
+[; ;api.c: 171: INTCONbits.GIE = 1;
+"171
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;api.c: 206: T0CONbits.TMR0ON = 1;
-"206
+[; ;api.c: 172: T0CONbits.TMR0ON = 1;
+"172
 [e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-[; ;api.c: 208: INTCON2bits.RBPU = 0;
-"208
+[; ;api.c: 174: INTCON2bits.RBPU = 0;
+"174
 [e = . . _INTCON2bits 2 1 -> -> 0 `i `uc ]
-[; ;api.c: 209: WPUB = 0;
-"209
+[; ;api.c: 175: WPUB = 0;
+"175
 [e = _WPUB -> -> 0 `i `uc ]
-[; ;api.c: 211: LATA = 0;
-"211
+[; ;api.c: 177: LATA = 0;
+"177
 [e = _LATA -> -> 0 `i `uc ]
-[; ;api.c: 212: LATB = 0;
-"212
+[; ;api.c: 178: LATB = 0;
+"178
 [e = _LATB -> -> 0 `i `uc ]
-[; ;api.c: 213: LATC = 0;
-"213
+[; ;api.c: 179: LATC = 0;
+"179
 [e = _LATC -> -> 0 `i `uc ]
-[; ;api.c: 214: }
-"214
+[; ;api.c: 180: }
+"180
 [e :UE 384 ]
 }
-[; ;api.c: 216: extern void setup();
-[; ;api.c: 217: extern void loop();
-"219
+[; ;api.c: 182: extern void setup();
+[; ;api.c: 183: extern void loop();
+"185
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;api.c: 219: void main(void) {
+[; ;api.c: 185: void main(void) {
 [e :U _main ]
 [f ]
-[; ;api.c: 220: __initSystem();
-"220
+[; ;api.c: 186: __initSystem();
+"186
 [e ( ___initSystem ..  ]
-[; ;api.c: 222: setup();
-"222
+[; ;api.c: 188: setup();
+"188
 [e ( _setup ..  ]
-[; ;api.c: 223: while (1) {
-"223
+[; ;api.c: 189: while (1) {
+"189
 [e :U 390 ]
 {
-[; ;api.c: 224: loop();
-"224
+[; ;api.c: 190: loop();
+"190
 [e ( _loop ..  ]
-"225
+"191
 }
 [e :U 389 ]
-"223
+"189
 [e $U 390  ]
 [e :U 391 ]
-[; ;api.c: 225: }
-[; ;api.c: 226: }
-"226
+[; ;api.c: 191: }
+[; ;api.c: 192: }
+"192
 [e :UE 388 ]
 }

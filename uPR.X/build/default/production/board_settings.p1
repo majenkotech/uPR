@@ -1,14 +1,24 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"35 api.h
-[v _digitalWrite `(v ~T0 @X0 0 ef2`uc`uc ]
-"34
-[v _pinMode `(v ~T0 @X0 0 ef2`uc`uc ]
-[c E3905 0 1 2 3 4 5 .. ]
-[n E3905 . BOOT IDLE LOADING FIRING EMPTY REMOVED  ]
-"36
-[v _digitalRead `(uc ~T0 @X0 0 ef1`uc ]
-"32
-[v _millis `(ul ~T0 @X0 0 ef ]
+[s S355 `*Vuc 1 `*Vuc 1 `*Vuc 1 `uc 1 `c 1 `c 1 ]
+[n S355 ioPin tris port lat pin adc pullup ]
+"2039 /opt/microchip/xc8/v1.12/include/pic18f23k20.h
+[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
+"734
+[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
+"1554
+[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
+"1818
+[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
+"497
+[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
+"1422
+[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
+"2260
+[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
+"963
+[v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
+"1686
+[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 [; ;pic18f23k20.h: 44: extern volatile unsigned char SSPMSK @ 0xF77;
 "46 /opt/microchip/xc8/v1.12/include/pic18f23k20.h
 [; ;pic18f23k20.h: 46: asm("SSPMSK equ 0F77h");
@@ -3544,442 +3554,237 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;api.h: 34: extern void pinMode(uint8_t pin, uint8_t mode);
 [; ;api.h: 35: extern void digitalWrite(uint8_t pin, uint8_t val);
 [; ;api.h: 36: extern uint8_t digitalRead(uint8_t pin);
-"14 main.c
-[v _digitsLeft `ui ~T0 @X0 -> 10 `i e ]
-[i _digitsLeft
+"3 board_settings.c
+[v __pins `CS355 ~T0 @X0 -> 0 `x e ]
+[i __pins
+:U ..
+:U ..
+"4
+&U _TRISB
+&U _PORTB
+&U _LATB
+-> -> 7 `i `uc
+-> -U -> 1 `i `c
+-> -> 7 `i `c
+..
+:U ..
+"5
+&U _TRISB
+&U _PORTB
+&U _LATB
+-> -> 6 `i `uc
+-> -U -> 1 `i `c
+-> -> 6 `i `c
+..
+:U ..
+"6
+&U _TRISB
+&U _PORTB
+&U _LATB
+-> -> 0 `i `uc
+-> -> 12 `i `c
+-> -> 0 `i `c
+..
+:U ..
+"7
+&U _TRISB
+&U _PORTB
+&U _LATB
+-> -> 1 `i `uc
+-> -> 10 `i `c
+-> -> 1 `i `c
+..
+:U ..
+"8
+&U _TRISA
+&U _PORTA
+&U _LATA
+-> -> 0 `i `uc
+-> -> 0 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"9
+&U _TRISA
+&U _PORTA
+&U _LATA
+-> -> 1 `i `uc
+-> -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"10
+&U _TRISC
+&U _PORTC
+&U _LATC
+-> -> 7 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"11
+&U _TRISC
+&U _PORTC
+&U _LATC
+-> -> 6 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"12
+&U _TRISC
+&U _PORTC
+&U _LATC
+-> -> 5 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"13
+&U _TRISC
+&U _PORTC
+&U _LATC
+-> -> 4 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"14
+&U _TRISC
+&U _PORTC
+&U _LATC
+-> -> 3 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
 :U ..
 "15
--> 45063 `ui
-"16
--> -> 4100 `i `ui
-"17
--> -> 28675 `i `ui
-"18
--> -> 28678 `i `ui
-"19
--> 53252 `ui
-"20
--> 57350 `ui
-"21
--> 57351 `ui
-"22
--> 45060 `ui
-"23
--> 61447 `ui
-"24
--> 61446 `ui
+&U _TRISC
+&U _PORTC
+&U _LATC
+-> -> 2 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
 ..
-]
-[; ;main.c: 14: uint16_t digitsLeft[10] = {
-[; ;main.c: 15: 0b1011000000000111,
-[; ;main.c: 16: 0b0001000000000100,
-[; ;main.c: 17: 0b0111000000000011,
-[; ;main.c: 18: 0b0111000000000110,
-[; ;main.c: 19: 0b1101000000000100,
-[; ;main.c: 20: 0b1110000000000110,
-[; ;main.c: 21: 0b1110000000000111,
-[; ;main.c: 22: 0b1011000000000100,
-[; ;main.c: 23: 0b1111000000000111,
-[; ;main.c: 24: 0b1111000000000110,
-[; ;main.c: 25: };
-"29
-[v _digitsRight `ui ~T0 @X0 -> 10 `i e ]
-[i _digitsRight
 :U ..
-"30
--> -> 3760 `i `ui
-"31
--> -> 640 `i `ui
-"32
--> -> 1648 `i `ui
-"33
--> -> 1760 `i `ui
-"34
--> -> 2752 `i `ui
-"35
--> -> 3296 `i `ui
-"36
--> -> 3312 `i `ui
-"37
--> -> 3712 `i `ui
-"38
--> -> 3824 `i `ui
-"39
--> -> 3808 `i `ui
+"16
+&U _TRISC
+&U _PORTC
+&U _LATC
+-> -> 1 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"17
+&U _TRISC
+&U _PORTC
+&U _LATC
+-> -> 0 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"18
+&U _TRISA
+&U _PORTA
+&U _LATA
+-> -> 5 `i `uc
+-> -> 4 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"19
+&U _TRISA
+&U _PORTA
+&U _LATA
+-> -> 4 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"20
+&U _TRISA
+&U _PORTA
+&U _LATA
+-> -> 3 `i `uc
+-> -> 3 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"21
+&U _TRISA
+&U _PORTA
+&U _LATA
+-> -> 2 `i `uc
+-> -> 2 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"22
+&U _TRISB
+&U _PORTB
+&U _LATB
+-> -> 5 `i `uc
+-> -U -> 1 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"23
+&U _TRISB
+&U _PORTB
+&U _LATB
+-> -> 4 `i `uc
+-> -> 11 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"24
+&U _TRISB
+&U _PORTB
+&U _LATB
+-> -> 3 `i `uc
+-> -> 9 `i `c
+-> -U -> 1 `i `c
+..
+:U ..
+"25
+&U _TRISB
+&U _PORTB
+&U _LATB
+-> -> 2 `i `uc
+-> -> 8 `i `c
+-> -U -> 1 `i `c
+..
 ..
 ]
-[; ;main.c: 29: uint16_t digitsRight[10] = {
-[; ;main.c: 30: 0b0000111010110000,
-[; ;main.c: 31: 0b0000001010000000,
-[; ;main.c: 32: 0b0000011001110000,
-[; ;main.c: 33: 0b0000011011100000,
-[; ;main.c: 34: 0b0000101011000000,
-[; ;main.c: 35: 0b0000110011100000,
-[; ;main.c: 36: 0b0000110011110000,
-[; ;main.c: 37: 0b0000111010000000,
-[; ;main.c: 38: 0b0000111011110000,
-[; ;main.c: 39: 0b0000111011100000,
-[; ;main.c: 40: };
-"42
-[v _displayRaw `(v ~T0 @X0 1 ef1`ui ]
-{
-[; ;main.c: 42: void displayRaw(uint16_t tval) {
-[e :U _displayRaw ]
-[v _tval `ui ~T0 @X0 1 r1 ]
-[f ]
-"43
-[v _tbit `uc ~T0 @X0 1 a ]
-[; ;main.c: 43: uint8_t tbit;
-[; ;main.c: 44: for (tbit = 0; tbit < 16; tbit++) {
-"44
-{
-[e = _tbit -> -> 0 `i `uc ]
-[e $ < -> _tbit `i -> 16 `i 357  ]
-[e $U 358  ]
-[e :U 357 ]
-{
-[; ;main.c: 45: digitalWrite(6+tbit, (tval & (1<<tbit)) ? 1 : 0);
-"45
-[e ( _digitalWrite (2 , -> + -> 6 `i -> _tbit `i `uc -> ? != & _tval -> << -> 1 `i _tbit `ui -> -> 0 `i `ui : -> 1 `i -> 0 `i `uc ]
-"46
-}
-"44
-[e ++ _tbit -> -> 1 `i `uc ]
-[e $ < -> _tbit `i -> 16 `i 357  ]
-[e :U 358 ]
-"46
-}
-[; ;main.c: 46: }
-[; ;main.c: 47: }
-"47
-[e :UE 356 ]
-}
-"49
-[v _display `(v ~T0 @X0 1 ef1`uc ]
-{
-[; ;main.c: 49: void display(uint8_t v) {
-[e :U _display ]
-[v _v `uc ~T0 @X0 1 r1 ]
-[f ]
-[; ;main.c: 50: if (v > 99) {
-"50
-[e $ ! > -> _v `i -> 99 `i 361  ]
-{
-[; ;main.c: 51: return;
-"51
-[e $UE 360  ]
-"52
-}
-[e :U 361 ]
-"53
-[v _tval `ui ~T0 @X0 1 a ]
-[; ;main.c: 52: }
-[; ;main.c: 53: uint16_t tval = digitsLeft[v / 10] | digitsRight[v % 10];
-[e = _tval | *U + &U _digitsLeft * -> -> / -> _v `i -> 10 `i `ui `ux -> -> # *U &U _digitsLeft `ui `ux *U + &U _digitsRight * -> -> % -> _v `i -> 10 `i `ui `ux -> -> # *U &U _digitsRight `ui `ux ]
-[; ;main.c: 54: displayRaw(tval);
-"54
-[e ( _displayRaw (1 _tval ]
-[; ;main.c: 55: }
-"55
-[e :UE 360 ]
-}
-"57
-[v _ammo `uc ~T0 @X0 1 e ]
-[i _ammo
--> -> 0 `i `uc
+[; ;board_settings.c: 3: const struct ioPin _pins[] = {
+[; ;board_settings.c: 4: { &TRISB, &PORTB, &LATB, 7, -1, 7 },
+[; ;board_settings.c: 5: { &TRISB, &PORTB, &LATB, 6, -1, 6 },
+[; ;board_settings.c: 6: { &TRISB, &PORTB, &LATB, 0, 12, 0 },
+[; ;board_settings.c: 7: { &TRISB, &PORTB, &LATB, 1, 10, 1 },
+[; ;board_settings.c: 8: { &TRISA, &PORTA, &LATA, 0, 0, -1 },
+[; ;board_settings.c: 9: { &TRISA, &PORTA, &LATA, 1, 1, -1 },
+[; ;board_settings.c: 10: { &TRISC, &PORTC, &LATC, 7, -1, -1 },
+[; ;board_settings.c: 11: { &TRISC, &PORTC, &LATC, 6, -1, -1 },
+[; ;board_settings.c: 12: { &TRISC, &PORTC, &LATC, 5, -1, -1 },
+[; ;board_settings.c: 13: { &TRISC, &PORTC, &LATC, 4, -1, -1 },
+[; ;board_settings.c: 14: { &TRISC, &PORTC, &LATC, 3, -1, -1 },
+[; ;board_settings.c: 15: { &TRISC, &PORTC, &LATC, 2, -1, -1 },
+[; ;board_settings.c: 16: { &TRISC, &PORTC, &LATC, 1, -1, -1 },
+[; ;board_settings.c: 17: { &TRISC, &PORTC, &LATC, 0, -1, -1 },
+[; ;board_settings.c: 18: { &TRISA, &PORTA, &LATA, 5, 4, -1 },
+[; ;board_settings.c: 19: { &TRISA, &PORTA, &LATA, 4, -1, -1 },
+[; ;board_settings.c: 20: { &TRISA, &PORTA, &LATA, 3, 3, -1 },
+[; ;board_settings.c: 21: { &TRISA, &PORTA, &LATA, 2, 2, -1 },
+[; ;board_settings.c: 22: { &TRISB, &PORTB, &LATB, 5, -1, -1 },
+[; ;board_settings.c: 23: { &TRISB, &PORTB, &LATB, 4, 11, -1 },
+[; ;board_settings.c: 24: { &TRISB, &PORTB, &LATB, 3, 9, -1 },
+[; ;board_settings.c: 25: { &TRISB, &PORTB, &LATB, 2, 8, -1 },
+[; ;board_settings.c: 26: };
+"28
+[v __pins_max `Cuc ~T0 @X0 1 e ]
+[i __pins_max
+-> / -> # __pins `ui -> # *U + &U __pins * -> -> -> 0 `i `ui `ux -> -> # *U &U __pins `ui `ux `ui `uc
 ]
-[; ;main.c: 57: uint8_t ammo = 0;
-"60
-[v _trigger `Cuc ~T0 @X0 1 e ]
-[i _trigger
--> -> 0 `i `uc
-]
-[; ;main.c: 60: const uint8_t trigger = 0;
-"61
-[v _magazine `Cuc ~T0 @X0 1 e ]
-[i _magazine
--> -> 1 `i `uc
-]
-[; ;main.c: 61: const uint8_t magazine = 1;
-"64
-[v _fpulse `Cuc ~T0 @X0 1 e ]
-[i _fpulse
--> -> 4 `i `uc
-]
-[; ;main.c: 64: const uint8_t fpulse = 4;
-"65
-[v _ok `Cuc ~T0 @X0 1 e ]
-[i _ok
--> -> 5 `i `uc
-]
-[; ;main.c: 65: const uint8_t ok = 5;
-"67
-[v _setup `(v ~T0 @X0 1 ef ]
-{
-[; ;main.c: 67: void setup() {
-[e :U _setup ]
-[f ]
-"68
-[v _i `i ~T0 @X0 1 a ]
-[; ;main.c: 68: int i;
-[; ;main.c: 70: for (i = 7; i < 22; i++) {
-"70
-{
-[e = _i -> 7 `i ]
-[e $ < _i -> 22 `i 363  ]
-[e $U 364  ]
-[e :U 363 ]
-{
-[; ;main.c: 71: pinMode(i, 0);
-"71
-[e ( _pinMode (2 , -> _i `uc -> -> 0 `i `uc ]
-"72
-}
-"70
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 22 `i 363  ]
-[e :U 364 ]
-"72
-}
-[; ;main.c: 72: }
-[; ;main.c: 73: pinMode(trigger, 2);
-"73
-[e ( _pinMode (2 , _trigger -> -> 2 `i `uc ]
-[; ;main.c: 74: pinMode(magazine, 2);
-"74
-[e ( _pinMode (2 , _magazine -> -> 2 `i `uc ]
-[; ;main.c: 75: pinMode(fpulse, 0);
-"75
-[e ( _pinMode (2 , _fpulse -> -> 0 `i `uc ]
-[; ;main.c: 76: pinMode(ok, 0);
-"76
-[e ( _pinMode (2 , _ok -> -> 0 `i `uc ]
-[; ;main.c: 77: digitalWrite(fpulse, 0);
-"77
-[e ( _digitalWrite (2 , _fpulse -> -> 0 `i `uc ]
-[; ;main.c: 78: digitalWrite(ok, 0);
-"78
-[e ( _digitalWrite (2 , _ok -> -> 0 `i `uc ]
-[; ;main.c: 79: display(ammo);
-"79
-[e ( _display (1 _ammo ]
-[; ;main.c: 81: }
-"81
-[e :UE 362 ]
-}
-[; ;main.c: 83: enum {
-[; ;main.c: 84: BOOT,
-[; ;main.c: 85: IDLE,
-[; ;main.c: 86: LOADING,
-[; ;main.c: 87: FIRING,
-[; ;main.c: 88: EMPTY,
-[; ;main.c: 89: REMOVED,
-[; ;main.c: 90: };
-"92
-[v _loop `(v ~T0 @X0 1 ef ]
-{
-[; ;main.c: 92: void loop() {
-[e :U _loop ]
-[f ]
-"93
-[v F3913 `uc ~T0 @X0 1 s state ]
-[i F3913
--> . `E3905 0 `uc
-]
-"94
-[v F3914 `ul ~T0 @X0 1 s ts ]
-[i F3914
--> -> -> 0 `i `l `ul
-]
-[; ;main.c: 93: static uint8_t state = BOOT;
-[; ;main.c: 94: static uint32_t ts = 0;
-[; ;main.c: 96: if (digitalRead(magazine) == 1 && state == BOOT) {
-"96
-[e $ ! && == -> ( _digitalRead (1 _magazine `i -> 1 `i == -> F3913 `i -> . `E3905 0 `i 367  ]
-{
-[; ;main.c: 97: state = REMOVED;
-"97
-[e = F3913 -> . `E3905 5 `uc ]
-[; ;main.c: 98: ts = millis();
-"98
-[e = F3914 ( _millis ..  ]
-[; ;main.c: 99: digitalWrite(ok, 0);
-"99
-[e ( _digitalWrite (2 , _ok -> -> 0 `i `uc ]
-[; ;main.c: 100: displayRaw(0b0000000100000000);
-"100
-[e ( _displayRaw (1 -> -> 256 `i `ui ]
-"101
-}
-[e :U 367 ]
-[; ;main.c: 101: }
-[; ;main.c: 103: if (digitalRead(magazine) == 0 && state == BOOT) {
-"103
-[e $ ! && == -> ( _digitalRead (1 _magazine `i -> 0 `i == -> F3913 `i -> . `E3905 0 `i 368  ]
-{
-[; ;main.c: 104: state = LOADING;
-"104
-[e = F3913 -> . `E3905 2 `uc ]
-[; ;main.c: 105: ts = millis();
-"105
-[e = F3914 ( _millis ..  ]
-[; ;main.c: 106: digitalWrite(ok, 0);
-"106
-[e ( _digitalWrite (2 , _ok -> -> 0 `i `uc ]
-[; ;main.c: 107: ammo = 99;
-"107
-[e = _ammo -> -> 99 `i `uc ]
-"108
-}
-[e :U 368 ]
-[; ;main.c: 108: }
-[; ;main.c: 111: if (digitalRead(magazine) == 1 && state != REMOVED) {
-"111
-[e $ ! && == -> ( _digitalRead (1 _magazine `i -> 1 `i != -> F3913 `i -> . `E3905 5 `i 369  ]
-{
-[; ;main.c: 112: state = REMOVED;
-"112
-[e = F3913 -> . `E3905 5 `uc ]
-[; ;main.c: 113: displayRaw(0b0000000100000000);
-"113
-[e ( _displayRaw (1 -> -> 256 `i `ui ]
-[; ;main.c: 114: digitalWrite(ok, 0);
-"114
-[e ( _digitalWrite (2 , _ok -> -> 0 `i `uc ]
-"115
-}
-[e :U 369 ]
-[; ;main.c: 115: }
-[; ;main.c: 117: if (digitalRead(magazine) == 0 && state == REMOVED) {
-"117
-[e $ ! && == -> ( _digitalRead (1 _magazine `i -> 0 `i == -> F3913 `i -> . `E3905 5 `i 370  ]
-{
-[; ;main.c: 118: state = LOADING;
-"118
-[e = F3913 -> . `E3905 2 `uc ]
-[; ;main.c: 119: ammo = 99;
-"119
-[e = _ammo -> -> 99 `i `uc ]
-[; ;main.c: 120: ts = millis();
-"120
-[e = F3914 ( _millis ..  ]
-[; ;main.c: 121: digitalWrite(ok, 0);
-"121
-[e ( _digitalWrite (2 , _ok -> -> 0 `i `uc ]
-"122
-}
-[e :U 370 ]
-[; ;main.c: 122: }
-[; ;main.c: 124: if (digitalRead(trigger) == 0 && state == IDLE) {
-"124
-[e $ ! && == -> ( _digitalRead (1 _trigger `i -> 0 `i == -> F3913 `i -> . `E3905 1 `i 371  ]
-{
-[; ;main.c: 125: state = FIRING;
-"125
-[e = F3913 -> . `E3905 3 `uc ]
-[; ;main.c: 126: ts = millis();
-"126
-[e = F3914 ( _millis ..  ]
-"127
-}
-[e :U 371 ]
-[; ;main.c: 127: }
-[; ;main.c: 129: if (digitalRead(trigger) == 1 && state == FIRING) {
-"129
-[e $ ! && == -> ( _digitalRead (1 _trigger `i -> 1 `i == -> F3913 `i -> . `E3905 3 `i 372  ]
-{
-[; ;main.c: 130: state = IDLE;
-"130
-[e = F3913 -> . `E3905 1 `uc ]
-"131
-}
-[e :U 372 ]
-[; ;main.c: 131: }
-[; ;main.c: 133: if (state == LOADING) {
-"133
-[e $ ! == -> F3913 `i -> . `E3905 2 `i 373  ]
-{
-[; ;main.c: 134: if (millis() - ts > 250) {
-"134
-[e $ ! > - ( _millis ..  F3914 -> -> -> 250 `i `l `ul 374  ]
-{
-[; ;main.c: 135: ts = millis();
-"135
-[e = F3914 ( _millis ..  ]
-[; ;main.c: 136: ammo--;
-"136
-[e -- _ammo -> -> 1 `i `uc ]
-[; ;main.c: 137: if (ammo == 95) {
-"137
-[e $ ! == -> _ammo `i -> 95 `i 375  ]
-{
-[; ;main.c: 138: digitalWrite(ok, 1);
-"138
-[e ( _digitalWrite (2 , _ok -> -> 1 `i `uc ]
-[; ;main.c: 139: state = IDLE;
-"139
-[e = F3913 -> . `E3905 1 `uc ]
-"140
-}
-[e :U 375 ]
-"141
-}
-[e :U 374 ]
-[; ;main.c: 140: }
-[; ;main.c: 141: }
-[; ;main.c: 142: display(ammo);
-"142
-[e ( _display (1 _ammo ]
-"143
-}
-[e :U 373 ]
-[; ;main.c: 143: }
-[; ;main.c: 145: if (state == FIRING) {
-"145
-[e $ ! == -> F3913 `i -> . `E3905 3 `i 376  ]
-{
-[; ;main.c: 146: if (millis() - ts > 66) {
-"146
-[e $ ! > - ( _millis ..  F3914 -> -> -> 66 `i `l `ul 377  ]
-{
-[; ;main.c: 147: digitalWrite(fpulse, 1);
-"147
-[e ( _digitalWrite (2 , _fpulse -> -> 1 `i `uc ]
-[; ;main.c: 148: ts = millis();
-"148
-[e = F3914 ( _millis ..  ]
-[; ;main.c: 149: ammo--;
-"149
-[e -- _ammo -> -> 1 `i `uc ]
-[; ;main.c: 150: if (ammo == 0) {
-"150
-[e $ ! == -> _ammo `i -> 0 `i 378  ]
-{
-[; ;main.c: 151: digitalWrite(ok, 0);
-"151
-[e ( _digitalWrite (2 , _ok -> -> 0 `i `uc ]
-[; ;main.c: 152: state = EMPTY;
-"152
-[e = F3913 -> . `E3905 4 `uc ]
-"153
-}
-[e :U 378 ]
-[; ;main.c: 153: }
-[; ;main.c: 154: digitalWrite(fpulse, 0);
-"154
-[e ( _digitalWrite (2 , _fpulse -> -> 0 `i `uc ]
-"155
-}
-[e :U 377 ]
-[; ;main.c: 155: }
-[; ;main.c: 156: display(ammo);
-"156
-[e ( _display (1 _ammo ]
-"157
-}
-[e :U 376 ]
-[; ;main.c: 157: }
-[; ;main.c: 158: }
-"158
-[e :UE 366 ]
-}
+[; ;board_settings.c: 28: const uint8_t _pins_max = (sizeof(_pins) / sizeof (_pins[0]));

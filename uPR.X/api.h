@@ -8,6 +8,7 @@ extern "C" {
 
 #include <xc.h>
 #include <stdint.h>
+#include "board_settings.h"
 
 #define F_CPU 64000000UL
 #define OUTPUT 0
@@ -15,6 +16,18 @@ extern "C" {
 #define INPUT_PULLUP 2
 #define LOW 0
 #define HIGH 1
+
+struct ioPin {
+    volatile uint8_t *tris;
+    volatile uint8_t *port;
+    volatile uint8_t *lat;
+    uint8_t pin;
+    int8_t adc;
+    int8_t pullup;
+};
+
+extern const struct ioPin _pins[];
+extern const uint8_t _pins_max;
 
 extern uint32_t millis();
 extern void delay(uint32_t del);

@@ -1,5 +1,5 @@
 
-# 1 "api.c"
+# 1 "board_settings.c"
 
 # 44 "/opt/microchip/xc8/v1.12/include/pic18f23k20.h"
 extern volatile unsigned char SSPMSK @ 0xF77;
@@ -4799,184 +4799,30 @@ extern void pinMode(uint8_t pin, uint8_t mode);
 extern void digitalWrite(uint8_t pin, uint8_t val);
 extern uint8_t digitalRead(uint8_t pin);
 
+# 3 "board_settings.c"
+const struct ioPin _pins[] = {
+{ &TRISB, &PORTB, &LATB, 7, -1, 7 },
+{ &TRISB, &PORTB, &LATB, 6, -1, 6 },
+{ &TRISB, &PORTB, &LATB, 0, 12, 0 },
+{ &TRISB, &PORTB, &LATB, 1, 10, 1 },
+{ &TRISA, &PORTA, &LATA, 0, 0, -1 },
+{ &TRISA, &PORTA, &LATA, 1, 1, -1 },
+{ &TRISC, &PORTC, &LATC, 7, -1, -1 },
+{ &TRISC, &PORTC, &LATC, 6, -1, -1 },
+{ &TRISC, &PORTC, &LATC, 5, -1, -1 },
+{ &TRISC, &PORTC, &LATC, 4, -1, -1 },
+{ &TRISC, &PORTC, &LATC, 3, -1, -1 },
+{ &TRISC, &PORTC, &LATC, 2, -1, -1 },
+{ &TRISC, &PORTC, &LATC, 1, -1, -1 },
+{ &TRISC, &PORTC, &LATC, 0, -1, -1 },
+{ &TRISA, &PORTA, &LATA, 5, 4, -1 },
+{ &TRISA, &PORTA, &LATA, 4, -1, -1 },
+{ &TRISA, &PORTA, &LATA, 3, 3, -1 },
+{ &TRISA, &PORTA, &LATA, 2, 2, -1 },
+{ &TRISB, &PORTB, &LATB, 5, -1, -1 },
+{ &TRISB, &PORTB, &LATB, 4, 11, -1 },
+{ &TRISB, &PORTB, &LATB, 3, 9, -1 },
+{ &TRISB, &PORTB, &LATB, 2, 8, -1 },
+};
 
-# 14 "api.c"
-#pragma config FOSC = INTIO67
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
-
-
-#pragma config PWRT = OFF
-#pragma config BOREN = OFF
-#pragma config BORV = 18
-
-
-#pragma config WDTEN = OFF
-#pragma config WDTPS = 32768
-
-
-#pragma config CCP2MX = PORTC
-#pragma config PBADEN = ON
-#pragma config LPT1OSC = OFF
-#pragma config HFOFST = ON
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = ON
-#pragma config LVP = OFF
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-
-
-#pragma config EBTRB = OFF
-
-static volatile uint32_t __millis = 0;
-
-
-
-void interrupt low_priority __isr_handler(void) {
-if (INTCONbits.TMR0IE && INTCONbits.T0IF) {
-INTCONbits.T0IF = 0;
-uint16_t tpr = (64000000UL/4)/1000;
-tpr = 0xFFFF - tpr;
-TMR0H = tpr >> 8;
-TMR0L = tpr & 0xFF;
-__millis++;
-}
-}
-
-uint32_t millis() {
-uint32_t mil;
-INTCONbits.T0IE = 0;
-mil = __millis;
-INTCONbits.T0IE = 1;
-return mil;
-}
-
-void delay(uint32_t del) {
-uint32_t start = millis();
-while (millis() - start < del) {
-continue;
-}
-}
-
-void pinMode(uint8_t pin, uint8_t mode) {
-if (pin >= _pins_max) {
-return;
-}
-
-switch(mode) {
-case 0:
-*(_pins[pin].tris) &= (1<<_pins[pin].pin);
-break;
-
-case 2:
-*(_pins[pin].tris) |= (1<<_pins[pin].pin);
-if (_pins[pin].adc >= 0) {
-if (_pins[pin].adc < 8) {
-ANSEL &= ~(1<<_pins[pin].adc);
-} else {
-ANSELH &= ~(1<<(_pins[pin].adc-8));
-}
-}
-if (_pins[pin].pullup >= 0) {
-WPUB |= (1<<_pins[pin].pullup);
-}
-break;
-
-case 1:
-*(_pins[pin].tris) |= (1<<_pins[pin].pin);
-if (_pins[pin].adc >= 0) {
-if (_pins[pin].adc < 8) {
-ANSEL &= ~(1<<_pins[pin].adc);
-} else {
-ANSELH &= ~(1<<(_pins[pin].adc-8));
-}
-}
-if (_pins[pin].pullup >= 0) {
-WPUB &= ~(1<<_pins[pin].pullup);
-}
-break;
-}
-}
-
-void digitalWrite(uint8_t pin, uint8_t val) {
-if (pin >= _pins_max) {
-return;
-}
-if (val > 0) {
-*_pins[pin].lat |= (1<<_pins[pin].pin);
-} else {
-*_pins[pin].lat &= ~(1<<_pins[pin].pin);
-}
-}
-
-uint8_t digitalRead(uint8_t pin) {
-if (pin >= _pins_max) {
-return 0;
-}
-return (*_pins[pin].port & (1<<_pins[pin].pin)) ? 1 : 0;
-}
-
-void __initSystem() {
-
-OSCCONbits.IRCF = 0b111;
-while (OSCCONbits.IOFS == 0) {
-continue;
-}
-OSCTUNEbits.PLLEN = 1;
-
-
-
-T0CONbits.T08BIT = 0;
-T0CONbits.T0CS = 0;
-T0CONbits.PSA = 1;
-uint16_t tpr = (64000000UL/4)/1000;
-tpr = 0xFFFF - tpr;
-TMR0H = tpr >> 8;
-TMR0L = tpr & 0xFF;
-INTCONbits.T0IF = 0;
-INTCONbits.T0IE = 1;
-INTCONbits.PEIE = 1;
-INTCONbits.GIE = 1;
-T0CONbits.TMR0ON = 1;
-
-INTCON2bits.RBPU = 0;
-WPUB = 0;
-
-LATA = 0;
-LATB = 0;
-LATC = 0;
-}
-
-extern void setup();
-extern void loop();
-
-void main(void) {
-__initSystem();
-
-setup();
-while (1) {
-loop();
-}
-}
+const uint8_t _pins_max = (sizeof(_pins) / sizeof (_pins[0]));

@@ -57,8 +57,8 @@ void display(uint8_t v) {
 uint8_t ammo = 0;
 
 // Inputs
-const uint8_t trigger = 0;
-const uint8_t magazine = 1;
+const uint8_t trigger = PIN_TRIG;
+const uint8_t magazine = PIN_MAG;
 
 // Outputs
 const uint8_t fpulse = 4;

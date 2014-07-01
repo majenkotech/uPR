@@ -62,40 +62,6 @@
 
 static volatile uint32_t __millis = 0;
 
-struct ioPin {
-    volatile uint8_t *tris;
-    volatile uint8_t *port;
-    volatile uint8_t *lat;
-    uint8_t pin;
-    int8_t adc;
-    int8_t pullup;
-};
-
-const struct ioPin _pins[] = {
-    { &TRISB, &PORTB, &LATB, 7, -1, 7 },
-    { &TRISB, &PORTB, &LATB, 6, -1, 6 },
-    { &TRISB, &PORTB, &LATB, 0, 12, 0 },
-    { &TRISB, &PORTB, &LATB, 1, 10, 1 },
-    { &TRISA, &PORTA, &LATA, 0, 0, -1 },
-    { &TRISA, &PORTA, &LATA, 1, 1, -1 },
-    { &TRISC, &PORTC, &LATC, 7, -1, -1 },
-    { &TRISC, &PORTC, &LATC, 6, -1, -1 },
-    { &TRISC, &PORTC, &LATC, 5, -1, -1 },
-    { &TRISC, &PORTC, &LATC, 4, -1, -1 },
-    { &TRISC, &PORTC, &LATC, 3, -1, -1 },
-    { &TRISC, &PORTC, &LATC, 2, -1, -1 },
-    { &TRISC, &PORTC, &LATC, 1, -1, -1 },
-    { &TRISC, &PORTC, &LATC, 0, -1, -1 },
-    { &TRISA, &PORTA, &LATA, 5, 4, -1 },
-    { &TRISA, &PORTA, &LATA, 4, -1, -1 },
-    { &TRISA, &PORTA, &LATA, 3, 3, -1 },
-    { &TRISA, &PORTA, &LATA, 2, 2, -1 },
-    { &TRISB, &PORTB, &LATB, 5, -1, -1 },
-    { &TRISB, &PORTB, &LATB, 4, 11, -1 },
-    { &TRISB, &PORTB, &LATB, 3, 9, -1 },
-    { &TRISB, &PORTB, &LATB, 2, 8, -1 },
-};
-
 #define N_PINS (sizeof(_pins) / sizeof (_pins[0]))
 
 void interrupt low_priority __isr_handler(void) {
@@ -125,7 +91,7 @@ void delay(uint32_t del) {
 }
 
 void pinMode(uint8_t pin, uint8_t mode) {
-    if (pin >= N_PINS) {
+    if (pin >= _pins_max) {
         return;
     }
 
@@ -165,7 +131,7 @@ void pinMode(uint8_t pin, uint8_t mode) {
 }
 
 void digitalWrite(uint8_t pin, uint8_t val) {
-    if (pin >= N_PINS) {
+    if (pin >= _pins_max) {
         return;
     }
     if (val > 0) {
@@ -176,7 +142,7 @@ void digitalWrite(uint8_t pin, uint8_t val) {
 }
 
 uint8_t digitalRead(uint8_t pin) {
-    if (pin >= N_PINS) {
+    if (pin >= _pins_max) {
         return LOW;
     }
     return (*_pins[pin].port & (1<<_pins[pin].pin)) ? HIGH : LOW;

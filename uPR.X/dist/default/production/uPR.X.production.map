@@ -17,7 +17,7 @@ Linker command line:
   -prdata=COMRAM,nvrram=COMRAM,nvbit=COMRAM,rbss=COMRAM,rbit=COMRAM \
   -pfarbss=FARRAM,fardata=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
-  -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE /tmp/cgtpYnKkU.obj \
+  -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE /tmp/cgt24BuAp.obj \
   dist/default/production/uPR.X.production.obj 
 
 Object code version is 3.10
@@ -30,7 +30,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/cgtpYnKkU.obj
+/tmp/cgt24BuAp.obj
                 end_init                             F2       F2        4        C       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
@@ -38,47 +38,47 @@ Call graph: (short form)
 dist/default/production/uPR.X.production.obj
                 intcodelo                            18       18       DA        C       0
                 mediumconst                        1F34     1F34       CC      F9A       0
-                text11                              AF2      AF2       A8        C       0
-                text10                              A36      A36       BC        C       0
-                text9                               D04      D04       62        C       0
-                text8                               DBC      DBC       26        C       0
-                text7                               C26      C26       7C        C       0
-                text6                               966      966       D0        C       0
-                text5                               CA2      CA2       62        C       0
-                text4                               B9A      B9A       8C        C       0
+                text11                              B0A      B0A       A8        C       0
+                text10                              A4E      A4E       BC        C       0
+                text9                               D28      D28       62        C       0
+                text8                               DE0      DE0       26        C       0
+                text7                               C3E      C3E       88        C       0
+                text6                               972      972       DC        C       0
+                text5                               CC6      CC6       62        C       0
+                text4                               BB2      BB2       8C        C       0
                 text3                                F6       F6      422        C       0
-                text2                               518      518      34C        C       0
-                text1                               864      864      102        C       0
-                text0                               DE2      DE2       16        C       0
+                text2                               518      518      358        C       0
+                text1                               870      870      102        C       0
+                text0                               E06      E06       16        C       0
                 cstackCOMRAM                          1        1       2C        1       1
                 cstackBANK0                          74       74        8       60       1
                 dataBANK0                            60       60       14       60       1
                 dataCOMRAM                           2D       2D       14        1       1
                 bssCOMRAM                            41       41        A        1       1
-                cinit                               D66      D66       56        C       0
-                idataBANK0                          E0C      E0C       14        C       0
-                idataCOMRAM                         DF8      DF8       14        C       0
+                cinit                               D8A      D8A       56        C       0
+                idataBANK0                          E30      E30       14        C       0
+                idataCOMRAM                         E1C      E1C       14        C       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   CODE           
                 end_init                             F2       F2        4         0
                 intcodelo                            18       18       DA         0
                 reset_vec                             0        0        4         0
-                text11                              AF2      AF2       A8         0
-                text10                              A36      A36       BC         0
-                text9                               D04      D04       62         0
-                text8                               DBC      DBC       26         0
-                text7                               C26      C26       7C         0
-                text6                               966      966       D0         0
-                text5                               CA2      CA2       62         0
-                text4                               B9A      B9A       8C         0
+                text11                              B0A      B0A       A8         0
+                text10                              A4E      A4E       BC         0
+                text9                               D28      D28       62         0
+                text8                               DE0      DE0       26         0
+                text7                               C3E      C3E       88         0
+                text6                               972      972       DC         0
+                text5                               CC6      CC6       62         0
+                text4                               BB2      BB2       8C         0
                 text3                                F6       F6      422         0
-                text2                               518      518      34C         0
-                text1                               864      864      102         0
-                text0                               DE2      DE2       16         0
-                cinit                               D66      D66       56         0
-                idataBANK0                          E0C      E0C       14         0
-                idataCOMRAM                         DF8      DF8       14         0
+                text2                               518      518      358         0
+                text1                               870      870      102         0
+                text0                               E06      E06       16         0
+                cinit                               D8A      D8A       56         0
+                idataBANK0                          E30      E30       14         0
+                idataCOMRAM                         E1C      E1C       14         0
 
         CLASS   CONST          
 
@@ -122,7 +122,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
                 cstackCOMRAM                   000001  00004A  00004B         1       1  COMRAM  
-                intcodelo                      000018  000E08  000E20         C       0  CODE    
+                intcodelo                      000018  000E2C  000E44         C       0  CODE    
                 dataBANK0                      000060  00001C  00007C        60       1  BANK0   
                 mediumconst                    001F34  0000CC  002000       F9A       0  MEDIUMCO
                 idloc                          200000  000008  200008    200000       0  IDLOC   
@@ -137,15 +137,15 @@ UNUSED ADDRESS RANGES
         BIGRAM           00004B-00005F               15
                          00007C-0001FF              184
         CODE             000004-000017               14
-                         000E20-001F33             1114
+                         000E44-001F33             10F0
         COMRAM           00004B-00005F               15
         CONST            000004-000017               14
-                         000E20-001F33             1114
+                         000E44-001F33             10F0
         EEDATA           F00000-F000FF              100
-        MEDIUMCONST      000E20-001F33             1114
+        MEDIUMCONST      000E44-001F33             10F0
         RAM              00007C-0001FF               84
         SFR              000F60-000FFF               A0
-        SMALLCONST       000E20-001F33              100
+        SMALLCONST       000E44-001F33              100
 
                                   Symbol Table
 
@@ -338,68 +338,70 @@ __Ltext8                 text8        000000
 __Ltext9                 text9        000000
 __S0                     (abs)        30000E
 __S1                     (abs)        00007C
-___awdiv                 text10       000A36
+___awdiv                 text10       000A4E
 ___awdiv@counter         cstackCOMRAM 00001B
 ___awdiv@dividend        cstackCOMRAM 000016
 ___awdiv@divisor         cstackCOMRAM 000018
 ___awdiv@quotient        cstackCOMRAM 00001D
 ___awdiv@sign            cstackCOMRAM 00001C
-___awmod                 text11       000AF2
+___awmod                 text11       000B0A
 ___awmod@counter         cstackCOMRAM 00001B
 ___awmod@dividend        cstackCOMRAM 000016
 ___awmod@divisor         cstackCOMRAM 000018
 ___awmod@sign            cstackCOMRAM 00001C
-___initSystem            text9        000D04
+___initSystem            text9        000D28
 ___initSystem@tpr        cstackCOMRAM 000018
 ___isr_handler           intcodelo    000018
 ___isr_handler@tpr       cstackCOMRAM 000014
 ___millis                bssCOMRAM    000041
 __accesstop              (abs)        000060
 __activetblptr           (abs)        000002
-__end_of___awdiv         text10       000AF2
-__end_of___awmod         text11       000B9A
-__end_of___initSystem    text9        000D66
+__end_of___awdiv         text10       000B0A
+__end_of___awmod         text11       000BB2
+__end_of___initSystem    text9        000D8A
 __end_of___isr_handler   intcodelo    0000F2
-__end_of__initialization cinit        000DB2
-__end_of__pins           mediumconst  001FFA
-__end_of_digitalRead     text7        000CA2
-__end_of_digitalWrite    text6        000A36
-__end_of_display         text4        000C26
-__end_of_displayRaw      text5        000D04
-__end_of_fpulse          mediumconst  001FFB
+__end_of__initialization cinit        000DD6
+__end_of__pins           mediumconst  001FFF
+__end_of__pins_max       mediumconst  001F35
+__end_of_digitalRead     text7        000CC6
+__end_of_digitalWrite    text6        000A4E
+__end_of_display         text4        000C3E
+__end_of_displayRaw      text5        000D28
+__end_of_fpulse          mediumconst  001F36
 __end_of_loop            text3        000518
-__end_of_magazine        mediumconst  001FFC
-__end_of_main            text0        000DF8
-__end_of_millis          text8        000DE2
-__end_of_ok              mediumconst  001FFD
-__end_of_pinMode         text2        000864
-__end_of_setup           text1        000966
-__end_of_trigger         mediumconst  001FFE
-__initialization         cinit        000D66
+__end_of_magazine        mediumconst  001F37
+__end_of_main            text0        000E1C
+__end_of_millis          text8        000E06
+__end_of_ok              mediumconst  001F38
+__end_of_pinMode         text2        000870
+__end_of_setup           text1        000972
+__end_of_trigger         mediumconst  001F39
+__initialization         cinit        000D8A
 __mediumconst            mediumconst  001F34
 __pbssCOMRAM             bssCOMRAM    000041
-__pcinit                 cinit        000D66
+__pcinit                 cinit        000D8A
 __pcstackBANK0           cstackBANK0  000074
 __pcstackCOMRAM          cstackCOMRAM 000001
 __pdataBANK0             dataBANK0    000060
 __pdataCOMRAM            dataCOMRAM   00002D
-__pidataBANK0            idataBANK0   000E0C
-__pidataCOMRAM           idataCOMRAM  000DF8
-__pins                   mediumconst  001F34
+__pidataBANK0            idataBANK0   000E30
+__pidataCOMRAM           idataCOMRAM  000E1C
+__pins                   mediumconst  001F39
+__pins_max               mediumconst  001F34
 __pintcodelo             intcodelo    000018
 __pmediumconst           mediumconst  001F34
-__ptext0                 text0        000DE2
-__ptext1                 text1        000864
-__ptext10                text10       000A36
-__ptext11                text11       000AF2
+__ptext0                 text0        000E06
+__ptext1                 text1        000870
+__ptext10                text10       000A4E
+__ptext11                text11       000B0A
 __ptext2                 text2        000518
 __ptext3                 text3        0000F6
-__ptext4                 text4        000B9A
-__ptext5                 text5        000CA2
-__ptext6                 text6        000966
-__ptext7                 text7        000C26
-__ptext8                 text8        000DBC
-__ptext9                 text9        000D04
+__ptext4                 text4        000BB2
+__ptext5                 text5        000CC6
+__ptext6                 text6        000972
+__ptext7                 text7        000C3E
+__ptext8                 text8        000DE0
+__ptext9                 text9        000D28
 __ramtop                 ramtop       000200
 __size_of___awdiv        (abs)        000000
 __size_of___awmod        (abs)        000000
@@ -416,21 +418,21 @@ __size_of_pinMode        (abs)        000000
 __size_of_setup          (abs)        000000
 __smallconst             smallconst   000000
 _ammo                    bssCOMRAM    000049
-_digitalRead             text7        000C26
-_digitalWrite            text6        000966
+_digitalRead             text7        000C3E
+_digitalWrite            text6        000972
 _digitsLeft              dataCOMRAM   00002D
 _digitsRight             dataBANK0    000060
-_display                 text4        000B9A
-_displayRaw              text5        000CA2
-_fpulse                  mediumconst  001FFA
+_display                 text4        000BB2
+_displayRaw              text5        000CC6
+_fpulse                  mediumconst  001F35
 _loop                    text3        0000F6
-_magazine                mediumconst  001FFB
-_main                    text0        000DE2
-_millis                  text8        000DBC
-_ok                      mediumconst  001FFC
+_magazine                mediumconst  001F36
+_main                    text0        000E06
+_millis                  text8        000DE0
+_ok                      mediumconst  001F37
 _pinMode                 text2        000518
-_setup                   text1        000864
-_trigger                 mediumconst  001FFD
+_setup                   text1        000870
+_trigger                 mediumconst  001F38
 digitalRead@pin          cstackCOMRAM 000016
 digitalWrite@pin         cstackCOMRAM 000016
 digitalWrite@val         cstackCOMRAM 000017
@@ -438,7 +440,7 @@ display@tval             cstackCOMRAM 00002A
 display@v                cstackCOMRAM 000021
 displayRaw@tbit          cstackCOMRAM 000020
 displayRaw@tval          cstackCOMRAM 00001B
-end_of_initialization    cinit        000DB2
+end_of_initialization    cinit        000DD6
 intlevel0                text         000000
 intlevel1                text         000000
 intlevel2                text         000000
@@ -450,14 +452,14 @@ pinMode@mode             cstackCOMRAM 000017
 pinMode@pin              cstackCOMRAM 000016
 setup@i                  cstackBANK0  000074
 start                    init         0000F2
-start_initialization     cinit        000D66
+start_initialization     cinit        000D8A
 
 
 FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 219 in file "api.c"
+		line 185 in file "api.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -520,7 +522,7 @@ Total ram usage:        3 bytes
 
  *************** function _pinMode *****************
  Defined at:
-		line 127 in file "api.c"
+		line 93 in file "api.c"
  Parameters:    Size  Location     Type
   pin             1   21[COMRAM] unsigned char 
   mode            1   22[COMRAM] unsigned char 
@@ -649,7 +651,7 @@ Total ram usage:        6 bytes
 
  *************** function _digitalWrite *****************
  Defined at:
-		line 167 in file "api.c"
+		line 133 in file "api.c"
  Parameters:    Size  Location     Type
   pin             1   21[COMRAM] unsigned char 
   val             1   22[COMRAM] unsigned char 
@@ -682,7 +684,7 @@ Total ram usage:        5 bytes
 
  *************** function _digitalRead *****************
  Defined at:
-		line 178 in file "api.c"
+		line 144 in file "api.c"
  Parameters:    Size  Location     Type
   pin             1   21[COMRAM] unsigned char 
  Auto vars:     Size  Location     Type
@@ -712,7 +714,7 @@ Total ram usage:        4 bytes
 
  *************** function _millis *****************
  Defined at:
-		line 112 in file "api.c"
+		line 78 in file "api.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -743,7 +745,7 @@ Total ram usage:        8 bytes
 
  *************** function ___initSystem *****************
  Defined at:
-		line 185 in file "api.c"
+		line 151 in file "api.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -838,7 +840,7 @@ Total ram usage:        7 bytes
 
  *************** function ___isr_handler *****************
  Defined at:
-		line 101 in file "api.c"
+		line 67 in file "api.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -870,41 +872,42 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 api.c
-		_millis        		CODE           	0DBC	0000	38
-		___initSystem  		CODE           	0D04	0000	98
-		_main          		CODE           	0DE2	0000	22
-		_digitalRead   		CODE           	0C26	0000	124
+		_millis        		CODE           	0DE0	0000	38
+		___initSystem  		CODE           	0D28	0000	98
+		_main          		CODE           	0E06	0000	22
+		_digitalRead   		CODE           	0C3E	0000	136
 		___isr_handler 		CODE           	0018	0000	218
-		_digitalWrite  		CODE           	0966	0000	208
-		_pinMode       		CODE           	0518	0000	844
+		_digitalWrite  		CODE           	0972	0000	220
+		_pinMode       		CODE           	0518	0000	856
 
-api.c estimated size: 1552
+api.c estimated size: 1588
 
 shared
-		_trigger       		MEDIUMCONST    	1FFD	0000	1
-		__pins         		MEDIUMCONST    	1F34	0000	198
-		_fpulse        		MEDIUMCONST    	1FFA	0000	1
-		__initializatio		CODE           	0D66	0000	76
-		_ok            		MEDIUMCONST    	1FFC	0000	1
-		_magazine      		MEDIUMCONST    	1FFB	0000	1
+		_trigger       		MEDIUMCONST    	1F38	0000	1
+		__pins         		MEDIUMCONST    	1F39	0000	198
+		_fpulse        		MEDIUMCONST    	1F35	0000	1
+		__initializatio		CODE           	0D8A	0000	76
+		_ok            		MEDIUMCONST    	1F37	0000	1
+		_magazine      		MEDIUMCONST    	1F36	0000	1
+		__pins_max     		MEDIUMCONST    	1F34	0000	1
 
-shared estimated size: 278
+shared estimated size: 279
 
 main.c
 		_loop          		CODE           	00F6	0000	1058
-		_display       		CODE           	0B9A	0000	140
-		_displayRaw    		CODE           	0CA2	0000	98
-		_setup         		CODE           	0864	0000	258
+		_display       		CODE           	0BB2	0000	140
+		_displayRaw    		CODE           	0CC6	0000	98
+		_setup         		CODE           	0870	0000	258
 
 main.c estimated size: 1554
 
 /opt/microchip/xc8/v1.12/sources/awmod.c
-		___awmod       		CODE           	0AF2	0000	168
+		___awmod       		CODE           	0B0A	0000	168
 
 /opt/microchip/xc8/v1.12/sources/awmod.c estimated size: 168
 
 /opt/microchip/xc8/v1.12/sources/awdiv.c
-		___awdiv       		CODE           	0A36	0000	188
+		___awdiv       		CODE           	0A4E	0000	188
 
 /opt/microchip/xc8/v1.12/sources/awdiv.c estimated size: 188
 
