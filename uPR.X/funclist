@@ -1,0 +1,20 @@
+_loop: CODE, 246 0 1058
+_trigger: MEDIUMCONST, 8189 0 1
+___awdiv: CODE, 2614 0 188
+_millis: CODE, 3516 0 38
+_display: CODE, 2970 0 140
+_displayRaw: CODE, 3234 0 98
+___initSystem: CODE, 3332 0 98
+__pins: MEDIUMCONST, 7988 0 198
+___awmod: CODE, 2802 0 168
+_main: CODE, 3554 0 22
+_fpulse: MEDIUMCONST, 8186 0 1
+__initialization: CODE, 3430 0 76
+_digitalRead: CODE, 3110 0 124
+___isr_handler: CODE, 24 0 218
+_digitalWrite: CODE, 2406 0 208
+_ok: MEDIUMCONST, 8188 0 1
+_setup: CODE, 2148 0 258
+_pinMode: CODE, 1304 0 844
+_magazine: MEDIUMCONST, 8187 0 1
+Total: 3740
