@@ -13,8 +13,8 @@ ifeq "${IGNORE_LOCAL}" "TRUE"
 else
 include Makefile
 # Include makefile containing local settings
-ifeq "$(wildcard nbproject/Makefile-local-default.mk)" "nbproject/Makefile-local-default.mk"
-include nbproject/Makefile-local-default.mk
+ifeq "$(wildcard nbproject/Makefile-local-uPR_v2.mk)" "nbproject/Makefile-local-uPR_v2.mk"
+include nbproject/Makefile-local-uPR_v2.mk
 endif
 endif
 
@@ -25,7 +25,7 @@ MV=mv
 CP=cp 
 
 # Macros
-CND_CONF=default
+CND_CONF=uPR_v2
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 IMAGE_TYPE=debug
 OUTPUT_SUFFIX=cof
@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c api.c board_settings.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c board_settings_1.c api.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/api.p1 ${OBJECTDIR}/board_settings.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/api.p1.d ${OBJECTDIR}/board_settings.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/board_settings_1.p1 ${OBJECTDIR}/api.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/board_settings_1.p1.d ${OBJECTDIR}/api.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/api.p1 ${OBJECTDIR}/board_settings.p1
+OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/board_settings_1.p1 ${OBJECTDIR}/api.p1
 
 # Source Files
-SOURCEFILES=main.c api.c board_settings.c
+SOURCEFILES=main.c board_settings_1.c api.c
 
 
 CFLAGS=
@@ -74,9 +74,9 @@ FIXDEPS=fixDeps
 # The following macros may be used in the pre and post step lines
 Device=PIC18F23K20
 ProjectDir=/home/matt/uPR/uPR.X
-ConfName=default
-ImagePath=dist/default/${IMAGE_TYPE}/uPR.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-ImageDir=dist/default/${IMAGE_TYPE}
+ConfName=uPR_v2
+ImagePath=dist/uPR_v2/${IMAGE_TYPE}/uPR.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+ImageDir=dist/uPR_v2/${IMAGE_TYPE}
 ImageName=uPR.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 IsDebug="true"
@@ -85,7 +85,7 @@ IsDebug="false"
 endif
 
 .build-conf:  ${BUILD_SUBPROJECTS}
-	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/uPR.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+	${MAKE}  -f nbproject/Makefile-uPR_v2.mk dist/${CND_CONF}/${IMAGE_TYPE}/uPR.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 	@echo "--------------------------------------"
 	@echo "User defined post-build step: [pk2cmd -p -f./dist/default/production/uPR.X.production.hex -M -R ]"
 	@pk2cmd -p -f./dist/default/production/uPR.X.production.hex -M -R 
@@ -103,6 +103,14 @@ ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/board_settings_1.p1: board_settings_1.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/board_settings_1.p1.d 
+	@${RM} ${OBJECTDIR}/board_settings_1.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit2  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/board_settings_1.p1  board_settings_1.c 
+	@-${MV} ${OBJECTDIR}/board_settings_1.d ${OBJECTDIR}/board_settings_1.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/board_settings_1.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 ${OBJECTDIR}/api.p1: api.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/api.p1.d 
@@ -110,14 +118,6 @@ ${OBJECTDIR}/api.p1: api.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit2  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/api.p1  api.c 
 	@-${MV} ${OBJECTDIR}/api.d ${OBJECTDIR}/api.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/api.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/board_settings.p1: board_settings.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/board_settings.p1.d 
-	@${RM} ${OBJECTDIR}/board_settings.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit2  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/board_settings.p1  board_settings.c 
-	@-${MV} ${OBJECTDIR}/board_settings.d ${OBJECTDIR}/board_settings.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/board_settings.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
@@ -128,6 +128,14 @@ ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/board_settings_1.p1: board_settings_1.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/board_settings_1.p1.d 
+	@${RM} ${OBJECTDIR}/board_settings_1.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/board_settings_1.p1  board_settings_1.c 
+	@-${MV} ${OBJECTDIR}/board_settings_1.d ${OBJECTDIR}/board_settings_1.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/board_settings_1.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 ${OBJECTDIR}/api.p1: api.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/api.p1.d 
@@ -135,14 +143,6 @@ ${OBJECTDIR}/api.p1: api.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/api.p1  api.c 
 	@-${MV} ${OBJECTDIR}/api.d ${OBJECTDIR}/api.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/api.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/board_settings.p1: board_settings.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/board_settings.p1.d 
-	@${RM} ${OBJECTDIR}/board_settings.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/board_settings.p1  board_settings.c 
-	@-${MV} ${OBJECTDIR}/board_settings.d ${OBJECTDIR}/board_settings.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/board_settings.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 
@@ -177,8 +177,8 @@ endif
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
-	${RM} -r build/default
-	${RM} -r dist/default
+	${RM} -r build/uPR_v2
+	${RM} -r dist/uPR_v2
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

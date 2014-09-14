@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=uPR.X
 
 # Active Configuration
-DEFAULTCONF=default
+DEFAULTCONF=uPR_v1
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=default 
+ALLCONFS=uPR_v1 uPR_v2 
 
 
 # build
@@ -45,13 +45,15 @@ ALLCONFS=default
 
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=uPR_v1 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=uPR_v2 clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=uPR_v1 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=uPR_v2 build
 
 
 

@@ -1,58 +1,6 @@
 #include "api.h"
+#include "LEDDisplay.h"
 
-/*
-
-       A
-     F   B
-       G
-     E   C
-       D    P
- */
-
-// UC = left, LC = right
-//    FGABfabpcgdePCDE
-uint16_t digitsLeft[10] = {
-    0b1011000000000111,
-    0b0001000000000100,
-    0b0111000000000011,
-    0b0111000000000110,
-    0b1101000000000100,
-    0b1110000000000110,
-    0b1110000000000111,
-    0b1011000000000100,
-    0b1111000000000111,
-    0b1111000000000110,
-};
-
-// UC = left, LC = right
-//    FGABfabpcgdePCDE
-uint16_t digitsRight[10] = {
-    0b0000111010110000,
-    0b0000001010000000,
-    0b0000011001110000,
-    0b0000011011100000,
-    0b0000101011000000,
-    0b0000110011100000,
-    0b0000110011110000,
-    0b0000111010000000,
-    0b0000111011110000,
-    0b0000111011100000,
-};
-
-void displayRaw(uint16_t tval) {
-    uint8_t tbit;
-    for (tbit = 0; tbit < 16; tbit++) {
-        digitalWrite(6+tbit, (tval & (1<<tbit)) ? HIGH : 0);
-    }
-}
-
-void display(uint8_t v) {
-    if (v > 99) {
-        return;
-    }
-    uint16_t tval = digitsLeft[v / 10] | digitsRight[v % 10];
-    displayRaw(tval);
-}
 
 uint8_t ammo = 0;
 
@@ -64,19 +12,45 @@ const uint8_t magazine = PIN_MAG;
 const uint8_t fpulse = 4;
 const uint8_t ok = 5;
 
-void setup() {
-    int i;
+// LED pins:
+//
+// Left digit:
+//
+// A = 19
+// B = 18
+// C = 8
+// D = 7
+// E = 6
+// F = 21
+// G = 20
+// DP = 9
+//
+// Right digit:
+//
+// A = 16
+// B = 15
+// C = 13
+// D = 11
+// E = 10
+// F = 17
+// G = 12
+// DP = 14
 
-    for (i = 7; i < 22; i++) {
-        pinMode(i, OUTPUT);
-    }
+const uint8_t ledPins[16] = {
+    19, 18, 8, 7, 6, 21, 20, 9,
+    16, 15, 13, 11, 10, 17, 12, 14
+};
+
+void setup() {
+    LED.setPins(ledPins);
     pinMode(trigger, INPUT_PULLUP);
     pinMode(magazine, INPUT_PULLUP);
     pinMode(fpulse, OUTPUT);
     pinMode(ok, OUTPUT);
     digitalWrite(fpulse, LOW);
     digitalWrite(ok, LOW);
-    display(ammo);
+
+    LED.displayValue(ammo);
 
 }
 
@@ -97,7 +71,8 @@ void loop() {
         state = REMOVED;
         ts = millis();
         digitalWrite(ok, LOW);
-        displayRaw(0b0000000100000000); // Clear display
+        ammo = 0;
+        LED.displayValue(ammo);
     }
 
     if (digitalRead(magazine) == LOW && state == BOOT) {
@@ -110,7 +85,8 @@ void loop() {
     // Magazine has just been removed.
     if (digitalRead(magazine) == HIGH && state != REMOVED) {
         state = REMOVED;
-        displayRaw(0b0000000100000000); // Clear display
+        ammo = 0;
+        LED.displayValue(ammo);
         digitalWrite(ok, LOW);
     }
 
@@ -139,7 +115,7 @@ void loop() {
                 state = IDLE;
             }
         }
-        display(ammo);
+        LED.displayValue(ammo);
     }
 
     if (state == FIRING) {
@@ -153,6 +129,6 @@ void loop() {
             }
             digitalWrite(fpulse, LOW);
         }
-        display(ammo);
+        LED.displayValue(ammo);
     }
 }
