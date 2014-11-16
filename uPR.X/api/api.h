@@ -29,6 +29,7 @@ extern void delay(uint32_t del);
 extern void pinMode(uint8_t pin, uint8_t mode);
 extern void digitalWrite(uint8_t pin, uint8_t val);
 extern uint8_t digitalRead(uint8_t pin);
+extern void savePower();
 
 #endif	/* API_H */
 

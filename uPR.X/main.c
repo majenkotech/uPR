@@ -67,12 +67,17 @@ void loop() {
     static uint8_t state = BOOT;
     static uint32_t ts = 0;
 
+    LED.displayValue(ammo);
+    delay(10);
+    LED.displayRaw(0);
+    delay(10);
+
     if (digitalRead(magazine) == HIGH && state == BOOT) {
         state = REMOVED;
         ts = millis();
         digitalWrite(ok, LOW);
         ammo = 0;
-        LED.displayValue(ammo);
+//        LED.displayValue(ammo);
     }
 
     if (digitalRead(magazine) == LOW && state == BOOT) {
@@ -86,7 +91,7 @@ void loop() {
     if (digitalRead(magazine) == HIGH && state != REMOVED) {
         state = REMOVED;
         ammo = 0;
-        LED.displayValue(ammo);
+//        LED.displayValue(ammo);
         digitalWrite(ok, LOW);
     }
 
@@ -115,7 +120,7 @@ void loop() {
                 state = IDLE;
             }
         }
-        LED.displayValue(ammo);
+//        LED.displayValue(ammo);
     }
 
     if (state == FIRING) {
@@ -129,6 +134,6 @@ void loop() {
             }
             digitalWrite(fpulse, LOW);
         }
-        LED.displayValue(ammo);
+//        LED.displayValue(ammo);
     }
 }

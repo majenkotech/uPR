@@ -34,7 +34,7 @@ uint32_t millis() {
 void delay(uint32_t del) {
     uint32_t start = millis();
     while (millis() - start < del) {
-        continue;
+        savePower();
     }
 }
 
@@ -125,6 +125,14 @@ void __initSystem() {
     LATA = 0;
     LATB = 0;
     LATC = 0;
+}
+
+// Put the system to sleep until the next "tick" of the timer.  This will
+// sleep for up to 1 ms.
+void savePower() {
+    OSCCONbits.IDLEN = 1;
+    OSCCONbits.SCS = 0b00;
+    asm("SLEEP");
 }
 
 extern void setup();
