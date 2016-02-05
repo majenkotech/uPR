@@ -162,8 +162,20 @@
         <property key="stack-type" value="compiled"/>
       </XC8-config-global>
       <item path="boards/uPR_v2/board_settings.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
       <item path="boards/uPR_v2/board_settings.h" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
     </conf>
     <conf name="uPR_v2" type="2">
@@ -280,8 +292,20 @@
         <property key="stack-type" value="compiled"/>
       </XC8-config-global>
       <item path="boards/uPR_v1/board_settings.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
       <item path="boards/uPR_v1/board_settings.h" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
     </conf>
   </confs>

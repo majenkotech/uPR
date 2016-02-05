@@ -68,13 +68,13 @@ void setup() {
 
 	uint8_t isConfigured = EEPROM.read(ee_first);
 	if (isConfigured != 1) {
-		EEPROM.write(ee_duty, 10);
+		EEPROM.write(ee_duty, duty);
 		EEPROM.write(ee_first, 1);
-		EEPROM.write(ee_start, 99);
-		EEPROM.write(ee_down, 95);
-		EEPROM.write(ee_speed1, 250);
-		EEPROM.write(ee_speed2, 66);
-		EEPROM.write(ee_pulse, 50);
+		EEPROM.write(ee_start, start);
+		EEPROM.write(ee_down, down);
+		EEPROM.write(ee_speed1, speed1);
+		EEPROM.write(ee_speed2, speed2);
+		EEPROM.write(ee_pulse, pulse);
 	}
 
 	duty = EEPROM.read(ee_duty);
@@ -230,11 +230,12 @@ void loop() {
 	if (state == LOADING) {
 		if (millis() - ts > speed1) {
 			ts = millis();
-			ammo--;
 
 			if (ammo == down) {
 				digitalWrite(ok, HIGH);
-				state = IDLE;
+				state = IDLE;                
+			} else {
+                ammo--;
 			}
 		}
 	}
@@ -244,11 +245,12 @@ void loop() {
 			digitalWrite(fpulse, HIGH);
 			pulseCounter = millis();
 			ts = millis();
-			ammo--;
 
 			if (ammo == 0) {
 				digitalWrite(ok, LOW);
 				state = EMPTY;
+			} else {
+                ammo--;
 			}
 		}
 	}

@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=libs/LEDDisplay/LEDDisplay.c main.c api/api.c boards/uPR_v1/board_settings.c
+SOURCEFILES_QUOTED_IF_SPACED=api/api.c boards/uPR_v1/board_settings.c libs/LEDDisplay/LEDDisplay.c main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/api/api.p1 ${OBJECTDIR}/boards/uPR_v1/board_settings.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/api/api.p1.d ${OBJECTDIR}/boards/uPR_v1/board_settings.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/api/api.p1 ${OBJECTDIR}/boards/uPR_v1/board_settings.p1 ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1 ${OBJECTDIR}/main.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/api/api.p1.d ${OBJECTDIR}/boards/uPR_v1/board_settings.p1.d ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d ${OBJECTDIR}/main.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/api/api.p1 ${OBJECTDIR}/boards/uPR_v1/board_settings.p1
+OBJECTFILES=${OBJECTDIR}/api/api.p1 ${OBJECTDIR}/boards/uPR_v1/board_settings.p1 ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1 ${OBJECTDIR}/main.p1
 
 # Source Files
-SOURCEFILES=libs/LEDDisplay/LEDDisplay.c main.c api/api.c boards/uPR_v1/board_settings.c
+SOURCEFILES=api/api.c boards/uPR_v1/board_settings.c libs/LEDDisplay/LEDDisplay.c main.c
 
 
 CFLAGS=
@@ -95,22 +95,6 @@ MP_PROCESSOR_OPTION=18F23K20
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1: libs/LEDDisplay/LEDDisplay.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/libs/LEDDisplay 
-	@${RM} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d 
-	@${RM} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit2  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1  libs/LEDDisplay/LEDDisplay.c 
-	@-${MV} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.d ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/main.p1.d 
-	@${RM} ${OBJECTDIR}/main.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit2  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/main.p1  main.c 
-	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
 ${OBJECTDIR}/api/api.p1: api/api.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/api 
 	@${RM} ${OBJECTDIR}/api/api.p1.d 
@@ -127,12 +111,11 @@ ${OBJECTDIR}/boards/uPR_v1/board_settings.p1: boards/uPR_v1/board_settings.c  nb
 	@-${MV} ${OBJECTDIR}/boards/uPR_v1/board_settings.d ${OBJECTDIR}/boards/uPR_v1/board_settings.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/boards/uPR_v1/board_settings.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-else
 ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1: libs/LEDDisplay/LEDDisplay.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/libs/LEDDisplay 
 	@${RM} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d 
 	@${RM} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1  libs/LEDDisplay/LEDDisplay.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit2  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1  libs/LEDDisplay/LEDDisplay.c 
 	@-${MV} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.d ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -140,10 +123,11 @@ ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/main.p1.d 
 	@${RM} ${OBJECTDIR}/main.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/main.p1  main.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit2  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/main.p1  main.c 
 	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+else
 ${OBJECTDIR}/api/api.p1: api/api.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/api 
 	@${RM} ${OBJECTDIR}/api/api.p1.d 
@@ -159,6 +143,22 @@ ${OBJECTDIR}/boards/uPR_v1/board_settings.p1: boards/uPR_v1/board_settings.c  nb
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/boards/uPR_v1/board_settings.p1  boards/uPR_v1/board_settings.c 
 	@-${MV} ${OBJECTDIR}/boards/uPR_v1/board_settings.d ${OBJECTDIR}/boards/uPR_v1/board_settings.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/boards/uPR_v1/board_settings.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1: libs/LEDDisplay/LEDDisplay.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/libs/LEDDisplay 
+	@${RM} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d 
+	@${RM} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1  libs/LEDDisplay/LEDDisplay.c 
+	@-${MV} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.d ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/libs/LEDDisplay/LEDDisplay.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/main.p1.d 
+	@${RM} ${OBJECTDIR}/main.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"api" -I"boards/uPR_v1" -I"libs/LEDDisplay" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/main.p1  main.c 
+	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 
