@@ -368,6 +368,7 @@ void loop() {
             if (single == 1) {
                 trigState = BLOCKED;
                 ammo--;
+                pulseCounter = millis();
     
                 if (ammo == 0) {
                     ammoState = IDLE;
@@ -378,12 +379,12 @@ void loop() {
                     digitalWrite(fpulse, HIGH);
                     pulseCounter = millis();
                     ts = millis();
-                ammo--;
+                    ammo--;
     
-                if (ammo == 0) {
-                    ammoState = IDLE;
-                    digitalWrite(ok, LOW);
-                }                
+                    if (ammo == 0) {
+                        ammoState = IDLE;
+                        digitalWrite(ok, LOW);
+                    }                
                 }
             }
         }
